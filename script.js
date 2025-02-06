@@ -13,8 +13,14 @@ function getRandomColor() {
   return colorSet[Math.floor(Math.random() * colorSet.length)];
 }
 
+function startNewGame(){
+  // reset score
+  score = 0;
+  loadNextRound();
+}
+
 // Start a new game / round
-function startNewGame() {
+function loadNextRound() {
   // Reset the game status
   gameStatus.textContent = '';
   gameStatus.onanimationend = null;
@@ -56,7 +62,7 @@ colorOptions.forEach(button => {
 
     
     gameStatus.onanimationend = () => {
-      startNewGame();
+      loadNextRound();
     }
 
     if (selectedColor === targetColor) {
