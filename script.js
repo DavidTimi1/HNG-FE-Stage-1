@@ -16,6 +16,7 @@ function getRandomColor() {
 function startNewGame(){
   // reset score
   score = 0;
+  scoreElement.textContent = score;
   loadNextRound();
 }
 
