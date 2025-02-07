@@ -1,8 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 body {
     font-family: Arial, sans-serif;
+    overflow-y: auto;
     text-align: center;
     background-color: #f4f4f4;
     margin: 0;
+    width: 100%;
+    height: 100%;
     padding: 10px;
   }
   
@@ -15,19 +30,20 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
 
-
   .score-container {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 20px;
+    width: 100%;
   }
 
-  .score-container > * {
+  .score-container > p {
     background-color: #222;
     color: white;
     padding: 10px;
     border-radius: 10px;
+    margin: 0;
     font-size: larger;
   }
 
@@ -37,22 +53,23 @@ body {
   }
   
   #colorBox {
-    width: 150px;
-    height: 150px;
-    margin: 20px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    width: 200px;
+    height: 200px;
+    margin: 35px auto;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
   }
   
   .color-options {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-content: center;
-    flex-wrap: wrap;
     gap: 10px;
+    width: 100%;
   }
   
   .color-option {
-    width: 60px;
-    height: 60px;
+    height: 75px;
+    max-width: 200px;
     border: 2px solid transparent;
     cursor: pointer;
     border-radius: 5px;
@@ -65,9 +82,12 @@ body {
   }
 
   #gameStatus {
+    position: absolute;
+    left: 50%;
+    translate: -50%;
     font-size: 1.5em;
     font-weight: 900;
-    animation: .5s ease-in-out 4;
+    animation: .25s ease-in-out 4;
   }
 
   #gameStatus.right {

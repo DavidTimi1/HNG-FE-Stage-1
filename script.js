@@ -13,10 +13,11 @@ function getRandomColor() {
   return colorSet[Math.floor(Math.random() * colorSet.length)];
 }
 
-function startNewGame(){
+function startNewGame() {
   // reset score
   score = 0;
   scoreElement.textContent = score;
+  
   loadNextRound();
 }
 
@@ -26,13 +27,16 @@ function loadNextRound() {
   gameStatus.textContent = '';
   gameStatus.onanimationend = null;
   gameStatus.classList.remove('right', 'wrong');
-  
+
+  // allow inputs
+  enableInputs();
+
   // Generate a new target color
   targetColor = getRandomColor();
   colorBox.style.backgroundColor = targetColor;
 
   let usedColors = [targetColor];
-  
+
   // Assign random colors to the buttons and ensure one matches the target
   const correctButtonIndex = Math.floor(Math.random() * colorOptions.length);
   colorOptions.forEach((button, index) => {
@@ -46,14 +50,22 @@ function loadNextRound() {
         color = getRandomColor();
 
       } while (usedColors.includes(color));
-      
-    usedColors.push(color);
-    }
 
+      usedColors.push(color);
+    }
 
     button.style.backgroundColor = color;
     button.dataset.color = color;
   });
+}
+
+
+function enableInputs(){
+  colorOptions.forEach(button => button.disabled = false)
+}
+
+function disableInputs(){
+  colorOptions.forEach(button => button.disabled = true)
 }
 
 // Handle color button click
@@ -61,7 +73,10 @@ colorOptions.forEach(button => {
   button.addEventListener('click', (event) => {
     const selectedColor = event.target.dataset.color;
 
-    
+    // disable plays during animations
+    disableInputs();
+
+    // load next round after displaying results
     gameStatus.onanimationend = () => {
       loadNextRound();
     }
